@@ -7,25 +7,30 @@ let ID,ROWS,COLS;
 let inR = document.querySelector(".inputR");
 let inC = document.querySelector(".inputC");
 let inID = document.querySelector(".InId");
-let body = document.querySelector('body');
-//по клику на какойто элемент body
-body.addEventListener('click', CheckID);
-//проверяем его id с введенным
-function CheckID(event){	
+//по клику на блок - проверить id - построить таблицу если верно
+/*document.querySelector(colors[0]).addEventListener('click', CheckID);
+document.querySelector(colors[1]).addEventListener('click', CheckID);
+document.querySelector(colors[2]).addEventListener('click', CheckID);
+document.querySelector(colors[3]).addEventListener('click', CheckID);
+document.querySelector(colors[4]).addEventListener('click', CheckID);
+document.querySelector(colors[5]).addEventListener('click', CheckID);
+document.querySelector(colors[6]).addEventListener('click', CheckID);
+document.querySelector(colors[7]).addEventListener('click', CheckID);*/
+let all = document.querySelectorAll('div');
+all.onclick = function(){
+	CheckID();
+}
+console.log(all);
+//читаем и проверяем id 
+function CheckID(){
 	//переводим строки в числа
 	ROWS = +inR.value;
 	COLS = +inC.value;
 	//переделываем строку в id
-	ID = '#' + inID.value;
-	//находим id элемента по которому кликнули	
-	let elemID = '#' + event.target.id;
-	//если id этого элемента присутствует среди *разрешенных*
-	if (colors.includes(elemID)){
-	//проверяем его: совпадают - создаем таблицу
-	if (ID == elemID) CreateTable();
-	}
-	//иначе ничего не делаем (доп if на разрешенность исправляет некритическую ошибку)
-	else return; 
+	ID = '#'+inID.value;
+	//проверка: ок - создаем таблицу
+	if (colors.includes(ID)) CreateTable();
+	else alert("Такого id нет");
 }
 //функция создания таблицы в соседнем элементе
 function CreateTable(){	
